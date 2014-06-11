@@ -155,7 +155,7 @@ describe('diagram-js-direct-editing', function() {
 
 
         // when pressing ESC
-        $(document).trigger($.Event('keyup', { which: 27 }));
+        $(textarea).trigger($.Event('keydown', { which: 27 }));
 
         // then
         expect(directEditing.isActive()).toBe(false);
@@ -180,7 +180,7 @@ describe('diagram-js-direct-editing', function() {
         directEditing.activate(shapeWithLabel);
 
         // when pressing Enter
-        $(textarea).val('BAR').trigger($.Event('keyup', { which: 13 }));
+        $(textarea).val('BAR').trigger($.Event('keydown', { which: 13 }));
 
         // then
         expect(directEditing.isActive()).toBe(false);
