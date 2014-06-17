@@ -34,7 +34,7 @@ describe('diagram-js-direct-editing', function() {
   });
 
 
-  describe('usage', function() {
+  describe('behavior', function() {
 
     var DirectEditingProvider = require('./DirectEditingProvider');
 
@@ -69,6 +69,7 @@ describe('diagram-js-direct-editing', function() {
 
         // then
         expect(activated).toBe(true);
+        expect(directEditing.getValue()).toBe('FOO');
 
         // textbox is correctly positioned
         expectEditingActive(directEditing, { left: 20, top: 10, width: 60, height: 50 });
@@ -189,6 +190,48 @@ describe('diagram-js-direct-editing', function() {
         expect(directEditing._textbox.textarea.parent().length).toBe(0);
 
         expect(shapeWithLabel.label).toBe('BAR');
+      }));
+
+    });
+
+
+    describe('textbox', function() {
+
+      it('should init label on open', inject(function(canvas, directEditing) {
+
+        // given
+        var shape = {
+          id: 's1',
+          x: 20, y: 10, width: 60, height: 50,
+          label: 'FOO'
+        };
+        canvas.addShape(shape);
+
+        // when
+        directEditing.activate(shape);
+
+        // then
+        expect(directEditing._textbox.textarea.val()).toBe('FOO');
+
+      }));
+
+
+      it('should clear label after close', inject(function(canvas, directEditing) {
+
+        // given
+        var shape = {
+          id: 's1',
+          x: 20, y: 10, width: 60, height: 50,
+          label: 'FOO'
+        };
+        canvas.addShape(shape);
+
+        // when
+        directEditing.activate(shape);
+        directEditing.cancel();
+
+        // then
+        expect(directEditing._textbox.textarea.val()).toBe('');
       }));
 
     });
