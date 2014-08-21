@@ -43,18 +43,14 @@ module.exports = function(grunt) {
         singleRun: true,
         autoWatch: false,
 
-        browsers: TEST_BROWSERS,
-
-        browserify: {
-          watch: false,
-          debug: true
-        }
+        browsers: TEST_BROWSERS
       },
       unit: {
         browsers: TEST_BROWSERS,
         debug: true
       }
     },
+
     jsdoc: {
       dist: {
         src: [ '<%= config.sources %>/**/*.js' ],
