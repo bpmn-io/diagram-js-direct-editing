@@ -40,7 +40,7 @@
   },
   "dependencies": {
     "jquery": "^2.1.1",
-    "lodash": "^2.4.0"
+    "lodash": "^3.0.1"
   },
   "peerDependencies": {
     "diagram-js": "^0.8.0"

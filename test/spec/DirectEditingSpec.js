@@ -1,11 +1,11 @@
 'use strict';
 
-var TestHelper = require('diagram-js/test/TestHelper');
+require('diagram-js/test/TestHelper');
 
 /* global bootstrapDiagram, inject */
 
 
-var _ = require('lodash'),
+var forEach = require('lodash/collection/forEach'),
     $ = require('jquery');
 
 var directEditingModule = require('../../');
@@ -16,7 +16,7 @@ function expectEditingActive(directEditing, bounds) {
 
   var textarea = directEditing._textbox.textarea;
 
-  _.forEach(bounds, function(val, key) {
+  forEach(bounds, function(val, key) {
     expect(textarea.css(key)).toBe(val + 'px');
   });
 }
