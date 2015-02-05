@@ -5,11 +5,23 @@ require('diagram-js/test/TestHelper');
 /* global bootstrapDiagram, inject */
 
 
-var forEach = require('lodash/collection/forEach'),
-    $ = require('jquery');
+var forEach = require('lodash/collection/forEach');
 
 var directEditingModule = require('../../');
 
+
+function triggerKeyEvent(element, event, code) {
+  var e = document.createEvent('Events');
+
+  if (e.initEvent) {
+    e.initEvent(event, true, true);
+  }
+
+  e.keyCode = code;
+  e.which = code;
+
+  return element.dispatchEvent(e);
+}
 
 function expectEditingActive(directEditing, bounds) {
   expect(directEditing.isActive()).toBe(true);
@@ -17,7 +29,7 @@ function expectEditingActive(directEditing, bounds) {
   var textarea = directEditing._textbox.textarea;
 
   forEach(bounds, function(val, key) {
-    expect(textarea.css(key)).toBe(val + 'px');
+    expect(textarea.style[key]).toBe(val + 'px');
   });
 }
 
@@ -136,7 +148,7 @@ describe('diagram-js-direct-editing', function() {
         expect(directEditing.isActive()).toBe(false);
 
         // textbox is detached (invisible)
-        expect(directEditing._textbox.textarea.parent().length).toBe(0);
+        expect(directEditing._textbox.textarea.parentNode).toBeFalsy();
       }));
 
 
@@ -154,15 +166,14 @@ describe('diagram-js-direct-editing', function() {
 
         directEditing.activate(shapeWithLabel);
 
-
         // when pressing ESC
-        $(textarea).trigger($.Event('keydown', { which: 27 }));
+        triggerKeyEvent(textarea, 'keydown', 27);
 
         // then
         expect(directEditing.isActive()).toBe(false);
 
         // textbox is detached (invisible)
-        expect(textarea.parent().length).toBe(0);
+        expect(textarea.parentNode).toBeFalsy();
       }));
 
 
@@ -180,14 +191,16 @@ describe('diagram-js-direct-editing', function() {
 
         directEditing.activate(shapeWithLabel);
 
+        textarea.value = 'BAR';
+
         // when pressing Enter
-        $(textarea).val('BAR').trigger($.Event('keydown', { which: 13 }));
+        triggerKeyEvent(textarea, 'keydown', 13);
 
         // then
         expect(directEditing.isActive()).toBe(false);
 
         // textbox is detached (invisible)
-        expect(directEditing._textbox.textarea.parent().length).toBe(0);
+        expect(directEditing._textbox.textarea.parentNode).toBeFalsy();
 
         expect(shapeWithLabel.label).toBe('BAR');
       }));
@@ -211,7 +224,7 @@ describe('diagram-js-direct-editing', function() {
         directEditing.activate(shape);
 
         // then
-        expect(directEditing._textbox.textarea.val()).toBe('FOO');
+        expect(directEditing._textbox.textarea.value).toBe('FOO');
 
       }));
 
@@ -231,7 +244,7 @@ describe('diagram-js-direct-editing', function() {
         directEditing.cancel();
 
         // then
-        expect(directEditing._textbox.textarea.val()).toBe('');
+        expect(directEditing._textbox.textarea.value).toBe('');
       }));
 
     });

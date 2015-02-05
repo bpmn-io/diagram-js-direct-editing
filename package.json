@@ -39,8 +39,8 @@
     "time-grunt": "^0.3.0"
   },
   "dependencies": {
-    "jquery": "^2.1.1",
-    "lodash": "^3.0.1"
+    "lodash": "^3.0.1",
+    "min-dom": "^0.1.1"
   },
   "peerDependencies": {
     "diagram-js": "^0.8.0"
