@@ -24,12 +24,12 @@ function triggerKeyEvent(element, event, code) {
 }
 
 function expectEditingActive(directEditing, bounds) {
-  expect(directEditing.isActive()).toBe(true);
+  expect(directEditing.isActive()).to.eql(true);
 
   var textarea = directEditing._textbox.textarea;
 
   forEach(bounds, function(val, key) {
-    expect(textarea.style[key]).toBe(val + 'px');
+    expect(textarea.style[key]).to.eql(val + 'px');
   });
 }
 
@@ -60,7 +60,7 @@ describe('diagram-js-direct-editing', function() {
 
 
     it('should register provider', inject(function(directEditing) {
-      expect(directEditing._providers[0] instanceof DirectEditingProvider).toBe(true);
+      expect(directEditing._providers[0] instanceof DirectEditingProvider).to.eql(true);
     }));
 
 
@@ -80,8 +80,8 @@ describe('diagram-js-direct-editing', function() {
         var activated = directEditing.activate(shapeWithLabel);
 
         // then
-        expect(activated).toBe(true);
-        expect(directEditing.getValue()).toBe('FOO');
+        expect(activated).to.eql(true);
+        expect(directEditing.getValue()).to.eql('FOO');
 
         // textbox is correctly positioned
         expectEditingActive(directEditing, { left: 20, top: 10, width: 60, height: 50 });
@@ -103,7 +103,7 @@ describe('diagram-js-direct-editing', function() {
         var activated = directEditing.activate(shapeWithLabel);
 
         // then
-        expect(activated).toBe(true);
+        expect(activated).to.eql(true);
 
         // textbox is correctly positioned
         expectEditingActive(directEditing, { left: 100, top: 100, width: 50, height: 20 });
@@ -123,8 +123,8 @@ describe('diagram-js-direct-editing', function() {
         var activated = directEditing.activate(shapeNoLabel);
 
         // then
-        expect(activated).toBe(false);
-        expect(directEditing.isActive()).toBe(false);
+        expect(activated).to.eql(false);
+        expect(directEditing.isActive()).to.eql(false);
       }));
 
 
@@ -145,10 +145,10 @@ describe('diagram-js-direct-editing', function() {
         directEditing.cancel();
 
         // then
-        expect(directEditing.isActive()).toBe(false);
+        expect(directEditing.isActive()).to.eql(false);
 
         // textbox is detached (invisible)
-        expect(directEditing._textbox.textarea.parentNode).toBeFalsy();
+        expect(directEditing._textbox.textarea.parentNode).not.to.exist;
       }));
 
 
@@ -170,10 +170,10 @@ describe('diagram-js-direct-editing', function() {
         triggerKeyEvent(textarea, 'keydown', 27);
 
         // then
-        expect(directEditing.isActive()).toBe(false);
+        expect(directEditing.isActive()).to.eql(false);
 
         // textbox is detached (invisible)
-        expect(textarea.parentNode).toBeFalsy();
+        expect(textarea.parentNode).not.to.exist;
       }));
 
 
@@ -197,12 +197,12 @@ describe('diagram-js-direct-editing', function() {
         triggerKeyEvent(textarea, 'keydown', 13);
 
         // then
-        expect(directEditing.isActive()).toBe(false);
+        expect(directEditing.isActive()).to.eql(false);
 
         // textbox is detached (invisible)
-        expect(directEditing._textbox.textarea.parentNode).toBeFalsy();
+        expect(directEditing._textbox.textarea.parentNode).not.to.exist;
 
-        expect(shapeWithLabel.label).toBe('BAR');
+        expect(shapeWithLabel.label).to.eql('BAR');
       }));
 
     });
@@ -224,7 +224,7 @@ describe('diagram-js-direct-editing', function() {
         directEditing.activate(shape);
 
         // then
-        expect(directEditing._textbox.textarea.value).toBe('FOO');
+        expect(directEditing._textbox.textarea.value).to.eql('FOO');
 
       }));
 
@@ -244,7 +244,7 @@ describe('diagram-js-direct-editing', function() {
         directEditing.cancel();
 
         // then
-        expect(directEditing._textbox.textarea.value).toBe('');
+        expect(directEditing._textbox.textarea.value).to.eql('');
       }));
 
     });
