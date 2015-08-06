@@ -36,11 +36,12 @@
     "karma-mocha": "^0.1.10",
     "karma-phantomjs-launcher": "0.1.2",
     "load-grunt-tasks": "^0.3.0",
+    "mocha": "^2.2.5",
     "mocha-test-container-support": "^0.1.0",
     "time-grunt": "^0.3.0"
   },
   "dependencies": {
-    "diagram-js": "^0.10.0",
+    "diagram-js": "^0.11.0",
     "lodash": "^3.0.1",
     "min-dom": "^0.2.0"
   }
