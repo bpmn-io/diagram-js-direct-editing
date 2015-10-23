@@ -1,6 +1,6 @@
 {
   "name": "diagram-js-direct-editing",
-  "version": "0.11.0",
+  "version": "0.12.0",
   "description": "Direct editing support for diagram-js",
   "scripts": {
     "test": "grunt test"
