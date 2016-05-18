@@ -205,60 +205,6 @@ describe('diagram-js-direct-editing', function() {
         expect(shapeWithLabel.label).to.eql('BAR');
       }));
 
-
-      it('should update size on completion', inject (function(canvas, directEditing){
-
-        //given
-        var shapeWithLabel = {
-          id: 's1',
-          x: 20, y: 10, width: 60, height: 50,
-          label: 'FOO'
-        };
-
-        canvas.addShape(shapeWithLabel);
-
-        directEditing.activate(shapeWithLabel);
-
-        var textarea = directEditing._textbox.textarea;
-
-        //when changing size and pressing Enter
-        textarea.style.height = "100px";
-        textarea.style.width = "40px";
-        triggerKeyEvent(textarea, 'keydown', 13);
-
-        //then expect size to be changed and position to be unchanged
-        expect(shapeWithLabel.width).to.eql(40);
-        expect(shapeWithLabel.height).to.eql(100);
-        expect(shapeWithLabel.x).to.eql(20);
-        expect(shapeWithLabel.y).to.eql(10);
-      }));
-
-
-      it('should not update size when canceling', inject (function(canvas, directEditing){
-
-        //given
-        var shapeWithLabel = {
-          id: 's1',
-          x: 20, y: 10, width: 60, height: 50,
-          label: 'FOO'
-        };
-
-        canvas.addShape(shapeWithLabel);
-
-        directEditing.activate(shapeWithLabel);
-
-        var textarea = directEditing._textbox.textarea;
-
-        //when changing size and pressing ESC
-        textarea.style.height = "100px";
-        textarea.style.width = "40px";
-        triggerKeyEvent(textarea, 'keydown', 27);
-
-        //then expect size to be still the same
-        expect(shapeWithLabel.width).to.eql(60);
-        expect(shapeWithLabel.height).to.eql(50);
-      }));
-
     });
 
 

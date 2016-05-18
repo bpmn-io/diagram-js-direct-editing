@@ -12,11 +12,8 @@ DirectEditingProvider.prototype.activate = function(element) {
   }
 };
 
-DirectEditingProvider.prototype.update = function(element, text, bounds) {
+DirectEditingProvider.prototype.update = function(element, text) {
   element.label = text;
-  element.height = bounds.height;
-  element.width = bounds.width;
-
 };
 
 
