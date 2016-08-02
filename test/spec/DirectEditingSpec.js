@@ -26,10 +26,10 @@ function triggerKeyEvent(element, event, code) {
 function expectEditingActive(directEditing, bounds) {
   expect(directEditing.isActive()).to.eql(true);
 
-  var textarea = directEditing._textbox.textarea;
+  var textbox = directEditing._textbox.content;
 
   forEach(bounds, function(val, key) {
-    expect(textarea.style[key]).to.eql(val + 'px');
+    expect(textbox.style[key]).to.eql(val + 'px');
   });
 }
 
@@ -148,7 +148,7 @@ describe('diagram-js-direct-editing', function() {
         expect(directEditing.isActive()).to.eql(false);
 
         // textbox is detached (invisible)
-        expect(directEditing._textbox.textarea.parentNode).not.to.exist;
+        expect(directEditing._textbox.content.parentNode).not.to.exist;
       }));
 
 
@@ -162,18 +162,18 @@ describe('diagram-js-direct-editing', function() {
         };
         canvas.addShape(shapeWithLabel);
 
-        var textarea = directEditing._textbox.textarea;
+        var textbox = directEditing._textbox;
 
         directEditing.activate(shapeWithLabel);
 
         // when pressing ESC
-        triggerKeyEvent(textarea, 'keydown', 27);
+        triggerKeyEvent(textbox.content, 'keydown', 27);
 
         // then
         expect(directEditing.isActive()).to.eql(false);
 
-        // textbox is detached (invisible)
-        expect(textarea.parentNode).not.to.exist;
+        // textbox container is detached (invisible)
+        expect(textbox.content.parentNode).not.to.exist;
       }));
 
 
@@ -187,20 +187,20 @@ describe('diagram-js-direct-editing', function() {
         };
         canvas.addShape(shapeWithLabel);
 
-        var textarea = directEditing._textbox.textarea;
+        var textbox = directEditing._textbox;
 
         directEditing.activate(shapeWithLabel);
 
-        textarea.value = 'BAR';
+        textbox.content.innerText = 'BAR';
 
         // when pressing Enter
-        triggerKeyEvent(textarea, 'keydown', 13);
+        triggerKeyEvent(textbox.content, 'keydown', 13);
 
         // then
         expect(directEditing.isActive()).to.eql(false);
 
         // textbox is detached (invisible)
-        expect(directEditing._textbox.textarea.parentNode).not.to.exist;
+        expect(textbox.content.parentNode).not.to.exist;
 
         expect(shapeWithLabel.label).to.eql('BAR');
       }));
@@ -224,7 +224,7 @@ describe('diagram-js-direct-editing', function() {
         directEditing.activate(shape);
 
         // then
-        expect(directEditing._textbox.textarea.value).to.eql('FOO');
+        expect(directEditing._textbox.content.innerText).to.eql('FOO');
 
       }));
 
@@ -244,7 +244,7 @@ describe('diagram-js-direct-editing', function() {
         directEditing.cancel();
 
         // then
-        expect(directEditing._textbox.textarea.value).to.eql('');
+        expect(directEditing._textbox.content.innerText).to.eql('');
       }));
 
     });
