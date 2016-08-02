@@ -3,7 +3,8 @@
   "version": "0.15.1",
   "description": "Direct editing support for diagram-js",
   "scripts": {
-    "test": "grunt test"
+    "all": "grunt",
+    "dev": "grunt auto-test"
   },
   "repository": {
     "type": "git",
@@ -18,13 +19,15 @@
   "devDependencies": {
     "brfs": "^1.2.0",
     "chai": "^2.3.0",
+    "eslint": "^2.11.1",
+    "eslint-plugin-mocha": "^2.2.0",
     "grunt": "^0.4.4",
     "grunt-cli": "^1.2.0",
     "grunt-contrib-connect": "^0.6.0",
     "grunt-contrib-copy": "^0.5.0",
-    "grunt-contrib-jshint": "^0.7.2",
     "grunt-contrib-uglify": "^0.4.0",
     "grunt-contrib-watch": "^0.5.0",
+    "grunt-eslint": "^18.1.0",
     "grunt-karma": "^0.8.0",
     "grunt-release": "^0.7.0",
     "karma": "^0.12.8",
