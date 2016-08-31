@@ -4,7 +4,8 @@
   "description": "Direct editing support for diagram-js",
   "scripts": {
     "all": "grunt",
-    "dev": "grunt auto-test"
+    "dev": "grunt auto-test",
+    "test": "grunt test"
   },
   "repository": {
     "type": "git",
@@ -49,6 +50,6 @@
     "min-dom": "^0.2.0"
   },
   "peerDependencies": {
-    "diagram-js": "*"
+    "diagram-js": "^0.x"
   }
 }
