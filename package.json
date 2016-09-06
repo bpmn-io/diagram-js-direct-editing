@@ -20,7 +20,7 @@
   "devDependencies": {
     "brfs": "^1.2.0",
     "chai": "^2.3.0",
-    "diagram-js": "^0.16.0",
+    "diagram-js": "^0.17.0",
     "eslint": "^2.11.1",
     "eslint-plugin-mocha": "^2.2.0",
     "grunt": "^0.4.4",
