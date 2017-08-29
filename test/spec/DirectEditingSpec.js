@@ -32,7 +32,7 @@ function triggerKeyEvent(element, event, code) {
   e.keyCode = code;
   e.which = code;
 
-  return element.dispatchEvent(e);
+  element.dispatchEvent(e);
 }
 
 function expectEditingActive(directEditing, parentBounds, contentBounds) {
