@@ -41,6 +41,9 @@ function expectEditingActive(directEditing, parentBounds, contentBounds) {
   var parent = directEditing._textbox.parent,
       content = directEditing._textbox.content;
 
+  expect(parent.className).to.eql('djs-direct-editing-parent');
+  expect(content.className).to.eql('djs-direct-editing-content');
+
   forEach(parentBounds, function(val, key) {
     expect(parseInt(parent['offset' + key.charAt(0).toUpperCase() + key.slice(1)])).to.be.closeTo(val, DELTA);
   });
