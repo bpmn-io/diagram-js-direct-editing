@@ -7,7 +7,7 @@ require('diagram-js/test/TestHelper');
 
 var forEach = require('lodash/collection/forEach');
 
-var directEditingModule = require('../../');
+var directEditingModule = require('../');
 
 var DELTA = 2;
 
