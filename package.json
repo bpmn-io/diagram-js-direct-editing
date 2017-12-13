@@ -44,7 +44,7 @@
   },
   "dependencies": {
     "lodash": "^3.0.1",
-    "min-dom": "^0.3.0"
+    "min-dom": "^1.0.0"
   },
   "peerDependencies": {
     "diagram-js": "^0.x"
