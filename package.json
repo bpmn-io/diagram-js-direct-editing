@@ -44,7 +44,7 @@
   },
   "dependencies": {
     "min-dash": "^2.2.0",
-    "min-dom": "^1.0.0"
+    "min-dom": "^2.0.1"
   },
   "peerDependencies": {
     "diagram-js": "^0.x"
