@@ -50,6 +50,6 @@
     "min-dom": "^2.0.1"
   },
   "peerDependencies": {
-    "diagram-js": "^0.x"
+    "diagram-js": "^0.x || ^1.x"
   }
 }
