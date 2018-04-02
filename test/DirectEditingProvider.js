@@ -1,11 +1,15 @@
 'use strict';
 
-var assign = require('min-dash').assign;
+import {
+  assign
+} from 'min-dash';
 
 
-function DirectEditingProvider(directEditing) {
+export default function DirectEditingProvider(directEditing) {
   directEditing.registerProvider(this);
 }
+
+DirectEditingProvider.$inject = [ 'directEditing' ];
 
 DirectEditingProvider.prototype.activate = function(element) {
   var context = {};
@@ -31,7 +35,3 @@ DirectEditingProvider.prototype.update = function(element, text) {
 DirectEditingProvider.prototype.setOptions = function(options) {
   this.options = options;
 };
-
-DirectEditingProvider.$inject = [ 'directEditing' ];
-
-module.exports = DirectEditingProvider;

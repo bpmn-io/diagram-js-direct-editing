@@ -1,13 +1,18 @@
 'use strict';
 
-require('diagram-js/test/TestHelper');
+import {
+  bootstrapDiagram,
+  inject
+} from 'diagram-js/test/helper';
 
-/* global bootstrapDiagram, inject */
+import {
+  forEach
+} from 'min-dash';
 
+import directEditingModule from '../';
 
-var forEach = require('min-dash').forEach;
+import DirectEditingProvider from './DirectEditingProvider';
 
-var directEditingModule = require('../');
 
 var DELTA = 2;
 
@@ -61,7 +66,9 @@ describe('diagram-js-direct-editing', function() {
 
   describe('bootstrap', function() {
 
-    beforeEach(bootstrapDiagram({ modules: [ directEditingModule ] }));
+    beforeEach(bootstrapDiagram({
+      modules: [ directEditingModule ]
+    }));
 
     it('should bootstrap diagram with component', inject(function() { }));
 
@@ -70,15 +77,15 @@ describe('diagram-js-direct-editing', function() {
 
   describe('behavior', function() {
 
-    var DirectEditingProvider = require('./DirectEditingProvider');
-
     var providerModule = {
       __init__: [ 'directEditingProvider' ],
       __depends__: [ directEditingModule ],
       directEditingProvider: [ 'type', DirectEditingProvider ]
     };
 
-    beforeEach(bootstrapDiagram({ modules: [ providerModule ] }));
+    beforeEach(bootstrapDiagram({
+      modules: [ providerModule ]
+    }));
 
     afterEach(inject(function(directEditingProvider) {
       directEditingProvider.setOptions(undefined);

@@ -36,6 +36,7 @@ module.exports = function(karma) {
     browserify: {
       debug: true,
       transform: [
+        [ 'babelify', { global: true } ],
         [ 'brfs', { global: true } ]
       ]
     }
