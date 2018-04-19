@@ -103,7 +103,7 @@ describe('diagram-js-direct-editing', function() {
         var shapeWithLabel = {
           id: 's1',
           x: 20, y: 10, width: 60, height: 50,
-          label: 'FOO'
+          label: 'FOO\nBAR'
         };
         canvas.addShape(shapeWithLabel);
 
@@ -112,7 +112,7 @@ describe('diagram-js-direct-editing', function() {
 
         // then
         expect(activated).to.eql(true);
-        expect(directEditing.getValue()).to.eql('FOO');
+        expect(directEditing.getValue()).to.eql('FOO\nBAR');
 
         var parentBounds = {
           left: 20,
@@ -125,7 +125,7 @@ describe('diagram-js-direct-editing', function() {
           top: 0,
           left: 0,
           width: 60,
-          height: 18
+          height: 38
         };
 
         // textbox is correctly positioned
