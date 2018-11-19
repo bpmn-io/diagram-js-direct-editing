@@ -9,6 +9,10 @@ ___Note:__ Yet to be released changes appear here._
 * `FEAT`: accept `fontFamily` and `fontWeight` styles
 * `CHORE`: use `box-sizing: border-box` for proper computation of
 
+## 1.4.0
+
+* `FEAT`: mark as compatible to `diagram-js@3`
+
 ## 1.2.2
 
 _This reverts v1.2.1._
