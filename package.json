@@ -25,7 +25,7 @@
     "brfs": "^1.5.0",
     "browserify": "^16.1.1",
     "chai": "^2.3.0",
-    "diagram-js": "^1.1.0",
+    "diagram-js": "^3.0.1",
     "eslint": "^4.12.0",
     "eslint-plugin-bpmn-io": "^0.5.2",
     "karma": "^1.7.1",
@@ -50,6 +50,6 @@
     "min-dom": "^3.0.0"
   },
   "peerDependencies": {
-    "diagram-js": "^0.x || ^1.x || ^2.x"
+    "diagram-js": "^0.x || ^1.x || ^2.x || ^3.x"
   }
 }
