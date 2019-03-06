@@ -10,17 +10,16 @@ module.exports = function(karma) {
 
   karma.set({
     frameworks: [
-      'browserify',
       'mocha',
       'chai'
     ],
 
     files: [
-      'test/**/*Spec.js'
+      'test/suite.js'
     ],
 
     preprocessors: {
-      'test/**/*Spec.js': [ 'browserify' ]
+      'test/suite.js': [ 'webpack' ]
     },
 
     reporters: [ 'spec' ],
@@ -32,13 +31,8 @@ module.exports = function(karma) {
     singleRun: true,
     autoWatch: false,
 
-    // browserify configuration
-    browserify: {
-      debug: true,
-      transform: [
-        [ 'babelify', { global: true } ],
-        [ 'brfs', { global: true } ]
-      ]
+    webpack: {
+      mode: 'development'
     }
   });
 
