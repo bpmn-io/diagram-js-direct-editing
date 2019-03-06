@@ -26,9 +26,12 @@ DirectEditingProvider.prototype.activate = function(element) {
   }
 };
 
-DirectEditingProvider.prototype.update = function(element, text, old, bounds) {
+DirectEditingProvider.prototype.update = function(element, text, oldText, bounds) {
   element.label = text;
-  element.returnedBounds = bounds;
+
+  var labelBounds = element.labelBounds || element;
+
+  assign(labelBounds, bounds);
 };
 
 DirectEditingProvider.prototype.setOptions = function(options) {
