@@ -280,13 +280,18 @@ describe('diagram-js-direct-editing', function() {
         expect(shapeWithLabel.label).to.eql('BAR');
       }));
 
-      it('should return the correct bounds', inject(function(canvas, directEditing) {
-        const shapeWithLabel = {
+
+      it('should complete with unchanged bounds', inject(function(canvas, directEditing) {
+
+        var labelBounds = { x: 100, y: 200, width: 300, height: 20 };
+
+        var shapeWithLabel = {
           id: 's1',
           x: 20, y: 10, width: 60, height: 50,
           label: 'FOO',
-          labelBounds: { x: 100, y: 200, width: 50, height: 20 }
+          labelBounds: labelBounds
         };
+
         canvas.addShape(shapeWithLabel);
 
         var textbox = directEditing._textbox;
@@ -297,9 +302,42 @@ describe('diagram-js-direct-editing', function() {
 
         directEditing.complete();
 
-        const bounds = shapeWithLabel.returnedBounds;
-        expect(shapeWithLabel.labelBounds.x).to.eql(bounds.x);
-        expect(shapeWithLabel.labelBounds.y).to.eql(bounds.y);
+        var bounds = shapeWithLabel.labelBounds;
+
+        expect(bounds).to.eql(labelBounds);
+      }));
+
+
+      it('should complete with changed bounds', inject(function(canvas, directEditing) {
+
+        var labelBounds = { x: 100, y: 200, width: 300, height: 20 };
+
+        var shapeWithLabel = {
+          id: 's1',
+          x: 20, y: 10, width: 60, height: 50,
+          label: 'FOO',
+          labelBounds: labelBounds
+        };
+
+        canvas.addShape(shapeWithLabel);
+
+        var textbox = directEditing._textbox;
+
+        directEditing.activate(shapeWithLabel);
+
+        textbox.content.innerText = 'BAR';
+        textbox.parent.style.left = '60px';
+        textbox.parent.style.top = '80px';
+        textbox.parent.style.width = '50px';
+        textbox.parent.style.height = '100px';
+
+        directEditing.complete();
+
+        var bounds = shapeWithLabel.labelBounds;
+
+        expect(bounds).to.eql({
+          x: 60, y: 80, width: 50, height: 100
+        });
       }));
 
     });
