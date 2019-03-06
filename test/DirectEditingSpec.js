@@ -280,6 +280,28 @@ describe('diagram-js-direct-editing', function() {
         expect(shapeWithLabel.label).to.eql('BAR');
       }));
 
+      it('should return the correct bounds', inject(function(canvas, directEditing) {
+        const shapeWithLabel = {
+          id: 's1',
+          x: 20, y: 10, width: 60, height: 50,
+          label: 'FOO',
+          labelBounds: { x: 100, y: 200, width: 50, height: 20 }
+        };
+        canvas.addShape(shapeWithLabel);
+
+        var textbox = directEditing._textbox;
+
+        directEditing.activate(shapeWithLabel);
+
+        textbox.content.innerText = 'BAR';
+
+        directEditing.complete();
+
+        const bounds = shapeWithLabel.returnedBounds;
+        expect(shapeWithLabel.labelBounds.x).to.eql(bounds.x);
+        expect(shapeWithLabel.labelBounds.y).to.eql(bounds.y);
+      }));
+
     });
 
 

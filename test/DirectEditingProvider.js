@@ -26,8 +26,9 @@ DirectEditingProvider.prototype.activate = function(element) {
   }
 };
 
-DirectEditingProvider.prototype.update = function(element, text) {
+DirectEditingProvider.prototype.update = function(element, text, old, bounds) {
   element.label = text;
+  element.returnedBounds = bounds;
 };
 
 DirectEditingProvider.prototype.setOptions = function(options) {
