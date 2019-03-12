@@ -323,6 +323,23 @@ describe('diagram-js-direct-editing', function() {
       }));
 
 
+      it('should trim label when getting value', inject(function(canvas, directEditing) {
+        // given
+        var shape = {
+          id: 's1',
+          x: 20, y: 10, width: 60, height: 50,
+          label: '\nFOO\n'
+        };
+        canvas.addShape(shape);
+
+        // when
+        directEditing.activate(shape);
+
+        // then
+        expect(directEditing.getValue()).to.eql('FOO');
+      }));
+
+
       it('should show resize handle if resizable', inject(function(canvas, directEditing, directEditingProvider) {
 
         // given
