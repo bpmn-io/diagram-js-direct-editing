@@ -6,6 +6,7 @@ All notable changes to [diagram-js-direct-editing](https://github.com/bpmn-io/di
 
 ___Note:__ Yet to be released changes appear here._
 
+* `FIX`: ignore superfluous whitespace around labels
 * `FEAT`: accept `fontFamily` and `fontWeight` styles
 * `CHORE`: use `box-sizing: border-box` for proper computation of
 
