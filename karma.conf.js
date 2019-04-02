@@ -11,7 +11,7 @@ module.exports = function(karma) {
   karma.set({
     frameworks: [
       'mocha',
-      'chai'
+      'sinon-chai'
     ],
 
     files: [
