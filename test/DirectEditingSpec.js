@@ -89,6 +89,7 @@ describe('diagram-js-direct-editing', function() {
 
     afterEach(inject(function(directEditingProvider) {
       directEditingProvider.setOptions(undefined);
+      sinon.restore();
     }));
 
 
@@ -342,116 +343,121 @@ describe('diagram-js-direct-editing', function() {
         });
       }));
 
-      it('should update with changed text', inject(function(canvas, directEditing, directEditingProvider) {
-        // given
-        sinon.spy(directEditingProvider, 'update');
 
-        var shapeWithLabel = {
-          id: 's1',
-          x: 20, y: 10, width: 60, height: 50,
-          label: 'FOO',
-          labelBounds: { x: 100, y: 200, width: 300, height: 20 }
-        };
+      it('should update with changed text', inject(
+        function(canvas, directEditing, directEditingProvider) {
 
-        canvas.addShape(shapeWithLabel);
+          // given
+          sinon.spy(directEditingProvider, 'update');
 
-        // when
-        directEditing.activate(shapeWithLabel);
+          var shapeWithLabel = {
+            id: 's1',
+            x: 20, y: 10, width: 60, height: 50,
+            label: 'FOO',
+            labelBounds: { x: 100, y: 200, width: 300, height: 20 }
+          };
 
-        var textbox = directEditing._textbox;
+          canvas.addShape(shapeWithLabel);
 
-        textbox.content.innerText = 'BAR';
+          // when
+          directEditing.activate(shapeWithLabel);
 
-        directEditing.complete();
+          var textbox = directEditing._textbox;
 
-        // then
-        expect(directEditingProvider.update.callCount).to.equal(1);
+          textbox.content.innerText = 'BAR';
 
-        directEditingProvider.update.restore();
-      }));
+          directEditing.complete();
 
-
-      it('should update with changed bounds height', inject(function(canvas, directEditing, directEditingProvider) {
-        // given
-        sinon.spy(directEditingProvider, 'update');
-
-        var shapeWithLabel = {
-          id: 's1',
-          x: 20, y: 10, width: 60, height: 50,
-          label: 'FOO',
-          labelBounds: { x: 100, y: 200, width: 300, height: 20 }
-        };
-
-        canvas.addShape(shapeWithLabel);
-
-        // when
-        directEditing.activate(shapeWithLabel);
-
-        var textbox = directEditing._textbox;
-
-        textbox.parent.style.height = '21px';
-
-        directEditing.complete();
-
-        // then
-        expect(directEditingProvider.update.callCount).to.equal(1);
-
-        directEditingProvider.update.restore();
-      }));
-
-      it('should update with changed bounds width', inject(function(canvas, directEditing, directEditingProvider) {
-        // given
-        sinon.spy(directEditingProvider, 'update');
-
-        var shapeWithLabel = {
-          id: 's1',
-          x: 20, y: 10, width: 60, height: 50,
-          label: 'FOO',
-          labelBounds: { x: 100, y: 200, width: 300, height: 20 }
-        };
-
-        canvas.addShape(shapeWithLabel);
-
-        // when
-        directEditing.activate(shapeWithLabel);
-
-        var textbox = directEditing._textbox;
-
-        textbox.parent.style.width = '301px';
-
-        directEditing.complete();
-
-        // then
-        expect(directEditingProvider.update.callCount).to.equal(1);
-
-        directEditingProvider.update.restore();
-      }));
+          // then
+          expect(directEditingProvider.update).to.have.been.calledOnce;
+        }
+      ));
 
 
-      it('should NOT update with unchanged text, bounds height or bounds width', inject(function(canvas, directEditing, directEditingProvider) {
+      it('should update with changed bounds height', inject(
+        function(canvas, directEditing, directEditingProvider) {
 
-        // given
-        sinon.spy(directEditingProvider, 'update');
+          // given
+          sinon.spy(directEditingProvider, 'update');
 
-        var shapeWithLabel = {
-          id: 's1',
-          x: 20, y: 10, width: 60, height: 50,
-          label: 'FOO',
-          labelBounds: { x: 100, y: 200, width: 300, height: 20 }
-        };
+          var shapeWithLabel = {
+            id: 's1',
+            x: 20, y: 10, width: 60, height: 50,
+            label: 'FOO',
+            labelBounds: { x: 100, y: 200, width: 300, height: 20 }
+          };
 
-        canvas.addShape(shapeWithLabel);
+          canvas.addShape(shapeWithLabel);
 
-        // when
-        directEditing.activate(shapeWithLabel);
+          // when
+          directEditing.activate(shapeWithLabel);
 
-        directEditing.complete();
+          var textbox = directEditing._textbox;
 
-        // then
-        expect(directEditingProvider.update.callCount).to.equal(0);
+          textbox.parent.style.height = '21px';
 
-        directEditingProvider.update.restore();
-      }));
+          directEditing.complete();
+
+          // then
+          expect(directEditingProvider.update).to.have.been.calledOnce;
+        }
+      ));
+
+
+      it('should update with changed bounds width', inject(
+        function(canvas, directEditing, directEditingProvider) {
+
+          // given
+          sinon.spy(directEditingProvider, 'update');
+
+          var shapeWithLabel = {
+            id: 's1',
+            x: 20, y: 10, width: 60, height: 50,
+            label: 'FOO',
+            labelBounds: { x: 100, y: 200, width: 300, height: 20 }
+          };
+
+          canvas.addShape(shapeWithLabel);
+
+          // when
+          directEditing.activate(shapeWithLabel);
+
+          var textbox = directEditing._textbox;
+
+          textbox.parent.style.width = '301px';
+
+          directEditing.complete();
+
+          // then
+          expect(directEditingProvider.update).to.have.been.calledOnce;
+        }
+      ));
+
+
+      it('should NOT update with unchanged text or bounds height/width', inject(
+        function(canvas, directEditing, directEditingProvider) {
+
+          // given
+          sinon.spy(directEditingProvider, 'update');
+
+          var shapeWithLabel = {
+            id: 's1',
+            x: 20, y: 10, width: 60, height: 50,
+            label: 'FOO',
+            labelBounds: { x: 100, y: 200, width: 300, height: 20 }
+          };
+
+          canvas.addShape(shapeWithLabel);
+
+          // when
+          directEditing.activate(shapeWithLabel);
+
+          directEditing.complete();
+
+          // then
+          expect(directEditingProvider.update).to.not.have.been.called;
+        }
+      ));
 
     });
 
