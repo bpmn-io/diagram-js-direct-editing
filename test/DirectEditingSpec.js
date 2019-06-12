@@ -624,6 +624,28 @@ describe('diagram-js-direct-editing', function() {
         expect(newParentBounds.height).to.be.closeTo(oldParentBounds.height + 100, DELTA);
       }));
 
+
+      it('should not insert HTML', inject(function(canvas, directEditing) {
+
+        // given
+        var shape = {
+          id: 's1',
+          x: 20, y: 10, width: 60, height: 50,
+          label: 'FOO'
+        };
+        canvas.addShape(shape);
+
+        directEditing.activate(shape);
+
+        var textBox = directEditing._textbox;
+
+        // when
+        textBox.insertText('<video src=1 onerror=alert(\'hueh\')>');
+
+        // then
+        expect(directEditing._textbox.content.innerHTML).to.eql('FOO&lt;video src=1 onerror=alert(\'hueh\')&gt;');
+      }));
+
     });
 
   });
