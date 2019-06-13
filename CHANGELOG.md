@@ -6,6 +6,10 @@ All notable changes to [diagram-js-direct-editing](https://github.com/bpmn-io/di
 
 ___Note:__ Yet to be released changes appear here._
 
+## 1.4.3
+
+* `FIX`: prevent injection of HTML and JS evaluation on paste ([#13](https://github.com/bpmn-io/diagram-js-direct-editing/issues/13))
+
 ## 1.4.2
 
 * `FIX`: only trigger update if text or bounds changed ([#11](https://github.com/bpmn-io/diagram-js-direct-editing/pull/11))
