@@ -459,6 +459,33 @@ describe('diagram-js-direct-editing', function() {
         }
       ));
 
+      it('should update with forceUpdate', inject(
+        function(canvas, directEditing, directEditingProvider) {
+
+          // given
+          sinon.spy(directEditingProvider, 'update');
+
+          directEditingProvider.setOptions({ forceUpdate: true });
+
+          var shapeWithLabel = {
+            id: 's1',
+            x: 20, y: 10, width: 60, height: 50,
+            label: 'FOO',
+            labelBounds: { x: 100, y: 200, width: 300, height: 20 }
+          };
+
+          canvas.addShape(shapeWithLabel);
+
+          // when
+          directEditing.activate(shapeWithLabel);
+
+          directEditing.complete();
+
+          // then
+          expect(directEditingProvider.update).to.have.been.called;
+        }
+      ));
+
     });
 
 
