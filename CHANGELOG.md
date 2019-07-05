@@ -6,6 +6,10 @@ All notable changes to [diagram-js-direct-editing](https://github.com/bpmn-io/di
 
 ___Note:__ Yet to be released changes appear here._
 
+## 1.5.0
+
+* `CHORE`: support diagram-js@4
+
 ## 1.4.3
 
 * `FIX`: prevent injection of HTML and JS evaluation on paste ([#13](https://github.com/bpmn-io/diagram-js-direct-editing/issues/13))
