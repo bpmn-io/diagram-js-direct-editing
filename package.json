@@ -1,6 +1,6 @@
 {
   "name": "diagram-js-direct-editing",
-  "version": "1.4.3",
+  "version": "1.5.0",
   "description": "Direct editing support for diagram-js",
   "scripts": {
     "all": "run-s lint test",
