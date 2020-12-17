@@ -6,6 +6,10 @@ All notable changes to [diagram-js-direct-editing](https://github.com/bpmn-io/di
 
 ___Note:__ Yet to be released changes appear here._
 
+## 1.6.2
+
+* `CHORE`: support diagram-js@7
+
 ## 1.6.1
 
 * `CHORE`: support diagram-js@6
