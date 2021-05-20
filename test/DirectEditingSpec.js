@@ -646,6 +646,50 @@ describe('diagram-js-direct-editing', function() {
         expect(directEditing._textbox.content.innerHTML).to.eql('FOO&lt;video src=1 onerror=alert(\'hueh\')&gt;');
       }));
 
+
+      it('should preserve line breaks (LF)', inject(function(canvas, directEditing) {
+
+        // given
+        var shape = {
+          id: 's1',
+          x: 20, y: 10, width: 60, height: 50,
+          label: 'FOO'
+        };
+        canvas.addShape(shape);
+
+        directEditing.activate(shape);
+
+        var textBox = directEditing._textbox;
+
+        // when
+        textBox.insertText('Foo\n\nBar');
+
+        // then
+        expect(directEditing._textbox.content.innerHTML).to.eql('FOOFoo<div><br></div><div>Bar</div>');
+      }));
+
+
+      it('should preserve line breaks (CRLF)', inject(function(canvas, directEditing) {
+
+        // given
+        var shape = {
+          id: 's1',
+          x: 20, y: 10, width: 60, height: 50,
+          label: 'FOO'
+        };
+        canvas.addShape(shape);
+
+        directEditing.activate(shape);
+
+        var textBox = directEditing._textbox;
+
+        // when
+        textBox.insertText('Foo\r\n\r\nBar');
+
+        // then
+        expect(directEditing._textbox.content.innerHTML).to.eql('FOOFoo<div><br></div><div>Bar</div>');
+      }));
+
     });
 
   });
