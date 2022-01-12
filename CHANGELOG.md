@@ -8,7 +8,7 @@ ___Note:__ Yet to be released changes appear here._
 
 ## 1.6.4
 
-* `CHORE`: support diagram-js@8
+* `DEPS`: support diagram-js@8
 
 ## 1.6.3
 
@@ -16,19 +16,19 @@ ___Note:__ Yet to be released changes appear here._
 
 ## 1.6.2
 
-* `CHORE`: support diagram-js@7
+* `DEPS`: support diagram-js@7
 
 ## 1.6.1
 
-* `CHORE`: support diagram-js@6
+* `DEPS`: support diagram-js@6
 
 ## 1.6.0
 
-* `CHORE`: support diagram-js@5
+* `DEPS`: support diagram-js@5
 
 ## 1.5.0
 
-* `CHORE`: support diagram-js@4
+* `DEPS`: support diagram-js@4
 
 ## 1.4.3
 
