@@ -6,6 +6,10 @@ All notable changes to [diagram-js-direct-editing](https://github.com/bpmn-io/di
 
 ___Note:__ Yet to be released changes appear here._
 
+## 1.6.4
+
+* `CHORE`: support diagram-js@8
+
 ## 1.6.3
 
 * `FIX`: preserve Windows newline characters ([#19](https://github.com/bpmn-io/diagram-js-direct-editing/pull/19))
