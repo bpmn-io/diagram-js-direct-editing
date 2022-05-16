@@ -284,6 +284,36 @@ describe('diagram-js-direct-editing', function() {
       }));
 
 
+      it('should complete on selection changed', inject(function(canvas, directEditing, eventBus) {
+
+        // given
+        var shapeWithLabel = {
+          id: 's1',
+          x: 20, y: 10, width: 60, height: 50,
+          label: 'FOO'
+        };
+        canvas.addShape(shapeWithLabel);
+
+        var textbox = directEditing._textbox;
+
+        directEditing.activate(shapeWithLabel);
+
+        textbox.content.innerText = 'BAR';
+
+        // when
+        eventBus.fire('selection.changed');
+
+        // then
+        expect(directEditing.isActive()).to.eql(false);
+
+        // textbox is detached (invisible)
+        expect(textbox.parent.parentNode).not.to.exist;
+
+        expect(shapeWithLabel.label).to.eql('BAR');
+      })
+      );
+
+
       it('should complete with unchanged bounds', inject(function(canvas, directEditing) {
 
         var labelBounds = { x: 100, y: 200, width: 300, height: 20 };
