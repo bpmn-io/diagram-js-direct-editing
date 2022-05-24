@@ -110,11 +110,23 @@ describe('diagram-js-direct-editing', function() {
         };
         canvas.addShape(shapeWithLabel);
 
+        var otherShape = {
+          id: 's2',
+          x: 220, y: 10, width: 60, height: 50,
+          label: 'other'
+        };
+        canvas.addShape(otherShape);
+
         // when
         var activated = directEditing.activate(shapeWithLabel);
 
         // then
         expect(activated).to.eql(true);
+
+        expect(directEditing.isActive()).to.eql(true);
+        expect(directEditing.isActive(shapeWithLabel)).to.eql(true);
+        expect(directEditing.isActive(otherShape)).to.eql(false);
+
         expect(directEditing.getValue()).to.eql('FOO\nBAR');
 
         var parentBounds = {
@@ -203,6 +215,7 @@ describe('diagram-js-direct-editing', function() {
         // then
         expect(activated).to.eql(false);
         expect(directEditing.isActive()).to.eql(false);
+        expect(directEditing.isActive(shapeNoLabel)).to.eql(false);
       }));
 
 
@@ -224,6 +237,7 @@ describe('diagram-js-direct-editing', function() {
 
         // then
         expect(directEditing.isActive()).to.eql(false);
+        expect(directEditing.isActive(shapeWithLabel)).to.eql(false);
 
         // textbox is detached (invisible)
         expect(directEditing._textbox.parent.parentNode).not.to.exist;
