@@ -20,7 +20,7 @@
   "license": "MIT",
   "devDependencies": {
     "chai": "^2.3.0",
-    "diagram-js": "^8.0.0",
+    "diagram-js": "^8.4.0",
     "eslint": "^4.12.0",
     "eslint-plugin-bpmn-io": "^0.5.2",
     "karma": "^4.0.1",
