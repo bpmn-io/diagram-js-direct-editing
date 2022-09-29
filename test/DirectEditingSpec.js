@@ -517,6 +517,7 @@ describe('diagram-js-direct-editing', function() {
 
 
       it('should trim label when getting value', inject(function(canvas, directEditing) {
+
         // given
         var shape = {
           id: 's1',
