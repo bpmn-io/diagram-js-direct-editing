@@ -1,3 +1,4 @@
+/* eslint-env node */
 
 // configures browsers to run test against
 // any of [ 'Chrome', 'Firefox' ]
