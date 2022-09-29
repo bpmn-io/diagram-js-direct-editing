@@ -29,5 +29,5 @@ jobs:
       run: npm ci
     - name: Build
       env:
-        TEST_BROWSERS: ChromeHeadless,PhantomJS
+        TEST_BROWSERS: ChromeHeadless
       run: npm run all

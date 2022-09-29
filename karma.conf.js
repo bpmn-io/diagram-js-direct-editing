@@ -1,8 +1,8 @@
 
 // configures browsers to run test against
-// any of [ 'PhantomJS', 'Chrome', 'Firefox', 'IE']
+// any of [ 'Chrome', 'Firefox' ]
 var browsers =
-  (process.env.TEST_BROWSERS || 'PhantomJS')
+  (process.env.TEST_BROWSERS || 'ChromeHeadless')
     .replace(/^\s+|\s+$/, '')
     .split(/\s*,\s*/g);
 
