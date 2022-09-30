@@ -20,7 +20,7 @@
   "license": "MIT",
   "devDependencies": {
     "chai": "^4.3.6",
-    "diagram-js": "^9.0.0",
+    "diagram-js": "^9.1.0",
     "eslint": "^8.24.0",
     "eslint-plugin-bpmn-io": "^0.16.0",
     "karma": "^6.4.1",
@@ -39,8 +39,8 @@
     "webpack": "^5.74.0"
   },
   "dependencies": {
-    "min-dash": "^3.5.2",
-    "min-dom": "^3.1.3"
+    "min-dash": "^4.0.0",
+    "min-dom": "^4.0.2"
   },
   "peerDependencies": {
     "diagram-js": "*"
