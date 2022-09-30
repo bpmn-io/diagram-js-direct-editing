@@ -6,6 +6,10 @@ All notable changes to [diagram-js-direct-editing](https://github.com/bpmn-io/di
 
 ___Note:__ Yet to be released changes appear here._
 
+## 2.0.0
+
+* `DEPS`: bump utility dependencies
+
 ## 1.8.0
 
 * `DEPS`: support diagram-js@9
