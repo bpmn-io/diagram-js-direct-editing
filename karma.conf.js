@@ -24,7 +24,7 @@ module.exports = function(karma) {
       'test/suite.js': [ 'webpack' ]
     },
 
-    reporters: [ 'spec' ],
+    reporters: [ 'progress' ],
 
     browsers: browsers,
 
