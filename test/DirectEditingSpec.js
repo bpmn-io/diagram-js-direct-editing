@@ -9,7 +9,7 @@ import {
   forEach
 } from 'min-dash';
 
-import directEditingModule from '../';
+import directEditingModule from '..';
 
 import DirectEditingProvider from './DirectEditingProvider';
 
