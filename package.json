@@ -50,7 +50,6 @@
     "diagram-js": "*"
   },
   "files": [
-    "lib",
-    "index.js"
+    "lib"
   ]
 }
