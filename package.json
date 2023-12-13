@@ -19,7 +19,6 @@
   "engines": {
     "node": "*"
   },
-  "main": "lib/index.js",
   "module": "lib/index.js",
   "author": "bpmn.io",
   "license": "MIT",
