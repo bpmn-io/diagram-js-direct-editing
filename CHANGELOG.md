@@ -6,6 +6,10 @@ All notable changes to [diagram-js-direct-editing](https://github.com/bpmn-io/di
 
 ___Note:__ Yet to be released changes appear here._
 
+## 2.1.1
+
+* `FIX`: drop `main` package export
+
 ## 2.1.0
 
 * `FEAT`: allow loading as a module
