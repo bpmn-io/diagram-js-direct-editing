@@ -16,6 +16,9 @@
     "diagram-js",
     "diagram-js-plugin"
   ],
+  "engines": {
+    "node": "*"
+  },
   "main": "lib/index.js",
   "author": "bpmn.io",
   "license": "MIT",
