@@ -23,7 +23,7 @@
   "author": "bpmn.io",
   "license": "MIT",
   "devDependencies": {
-    "chai": "^4.3.10",
+    "chai": "^5.0.0",
     "diagram-js": "^13.1.0",
     "eslint": "^8.55.0",
     "eslint-plugin-bpmn-io": "^1.0.0",
