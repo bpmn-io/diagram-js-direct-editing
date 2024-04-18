@@ -551,8 +551,10 @@ describe('diagram-js-direct-editing', function() {
 
         // then
         var resizeHandle = directEditing._textbox.parent.getElementsByClassName('djs-direct-editing-resize-handle')[0];
+        var parent = directEditing._textbox.parent;
 
         expect(resizeHandle).to.exist;
+        expect(parent.getAttribute('style').indexOf('background-color:')).not.to.eql(-1);
       }));
 
 
@@ -571,8 +573,10 @@ describe('diagram-js-direct-editing', function() {
 
         // then
         var resizeHandle = directEditing._textbox.parent.getElementsByClassName('djs-direct-editing-resize-handle')[0];
+        var parent = directEditing._textbox.parent;
 
         expect(resizeHandle).not.to.exist;
+        expect(parent.getAttribute('style').indexOf('background-color:')).to.eql(-1);
       }));
 
 
