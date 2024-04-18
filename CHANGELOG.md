@@ -6,6 +6,25 @@ All notable changes to [diagram-js-direct-editing](https://github.com/bpmn-io/di
 
 ___Note:__ Yet to be released changes appear here._
 
+* `FEAT`: remove background for non-resizable textboxes ([#23](https://github.com/bpmn-io/diagram-js-direct-editing/issues/23))
+
+### Breaking Changes
+
+* By default, no background is shown when editing a static sized element. To restore old behavior, add a style config when activating direct editing:
+  ```
+  const MyProvider = { 
+    activate: (element) => {
+      return {
+        style: {
+          backgroundColor: '#ffffff',
+          border: '1px solid #ccc'
+        }
+        // ...
+      }
+    }
+  }
+  ```
+
 ## 2.1.2
 
 _This reverts `v2.1.1`._
