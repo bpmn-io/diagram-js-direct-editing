@@ -6,6 +6,8 @@ All notable changes to [diagram-js-direct-editing](https://github.com/bpmn-io/di
 
 ___Note:__ Yet to be released changes appear here._
 
+## 3.0.0
+
 * `FEAT`: remove background for non-resizable textboxes ([#23](https://github.com/bpmn-io/diagram-js-direct-editing/issues/23))
 
 ### Breaking Changes
