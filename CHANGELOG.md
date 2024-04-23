@@ -6,6 +6,12 @@ All notable changes to [diagram-js-direct-editing](https://github.com/bpmn-io/di
 
 ___Note:__ Yet to be released changes appear here._
 
+## 3.0.1
+
+_This reverts `v3.0.0`._
+
+* `FEAT`: restore background for all textboxes. You can remove the background with custom styles or a style config in direct editing provider.
+
 ## 3.0.0
 
 * `FEAT`: remove background for non-resizable textboxes ([#23](https://github.com/bpmn-io/diagram-js-direct-editing/issues/23))
