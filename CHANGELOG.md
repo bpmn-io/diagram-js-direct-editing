@@ -6,6 +6,10 @@ All notable changes to [diagram-js-direct-editing](https://github.com/bpmn-io/di
 
 ___Note:__ Yet to be released changes appear here._
 
+## 3.1.0
+
+* `DEPS`: update to `min-dom@4.2.1`
+
 ## 3.0.1
 
 _This reverts `v3.0.0`._
