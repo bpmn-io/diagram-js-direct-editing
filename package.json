@@ -24,7 +24,7 @@
   "author": "bpmn.io",
   "license": "MIT",
   "devDependencies": {
-    "chai": "^4.3.10",
+    "chai": "^5.0.0",
     "diagram-js": "^14.0.0",
     "eslint": "^8.55.0",
     "eslint-plugin-bpmn-io": "^1.0.0",
@@ -38,8 +38,8 @@
     "mocha-test-container-support": "^0.2.0",
     "npm-run-all2": "^6.0.0",
     "puppeteer": "^23.0.0",
-    "sinon": "^17.0.1",
-    "sinon-chai": "^3.7.0",
+    "sinon": "^19.0.0",
+    "sinon-chai": "^4.0.0",
     "webpack": "^5.89.0"
   },
   "dependencies": {
