@@ -24,7 +24,6 @@ jobs:
       if: ${{ matrix.integration-deps != '' }}
       run: npm install ${{ matrix.integration-deps }}
     - name: Build
-      if: ${{ matrix.integration-deps == '' }}
       env:
         TEST_BROWSERS: ChromeHeadless
       run: npm run all
