@@ -9,7 +9,7 @@ ___Note:__ Yet to be released changes appear here._
 ## 3.2.0
 
 * `FEAT`: restore focus on Canvas after close
-* `DEPS`: update to `diagram-js@15.0.0`
+* `FEAT`: support `diagram-js@15.0.0`
 
 ## 3.1.0
 
