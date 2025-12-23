@@ -1,4 +1,5 @@
-/* global sinon */
+import { expect } from 'chai';
+import { spy, restore } from 'sinon';
 
 import {
   bootstrapDiagram,
@@ -89,7 +90,8 @@ describe('diagram-js-direct-editing', function() {
 
     afterEach(inject(function(directEditingProvider) {
       directEditingProvider.setOptions(undefined);
-      sinon.restore();
+
+      restore();
     }));
 
 
@@ -362,7 +364,7 @@ describe('diagram-js-direct-editing', function() {
         function(canvas, directEditing, directEditingProvider) {
 
           // given
-          sinon.spy(directEditingProvider, 'update');
+          var updateSpy = spy(directEditingProvider, 'update');
 
           var shapeWithLabel = {
             id: 's1',
@@ -383,7 +385,7 @@ describe('diagram-js-direct-editing', function() {
           directEditing.complete();
 
           // then
-          expect(directEditingProvider.update).to.have.been.calledOnce;
+          expect(updateSpy).to.have.been.calledOnce;
         }
       ));
 
@@ -392,7 +394,7 @@ describe('diagram-js-direct-editing', function() {
         function(canvas, directEditing, directEditingProvider) {
 
           // given
-          sinon.spy(directEditingProvider, 'update');
+          var updateSpy = spy(directEditingProvider, 'update');
 
           var shapeWithLabel = {
             id: 's1',
@@ -413,7 +415,7 @@ describe('diagram-js-direct-editing', function() {
           directEditing.complete();
 
           // then
-          expect(directEditingProvider.update).to.have.been.calledOnce;
+          expect(updateSpy).to.have.been.calledOnce;
         }
       ));
 
@@ -422,7 +424,7 @@ describe('diagram-js-direct-editing', function() {
         function(canvas, directEditing, directEditingProvider) {
 
           // given
-          sinon.spy(directEditingProvider, 'update');
+          var updateSpy = spy(directEditingProvider, 'update');
 
           var shapeWithLabel = {
             id: 's1',
@@ -443,7 +445,7 @@ describe('diagram-js-direct-editing', function() {
           directEditing.complete();
 
           // then
-          expect(directEditingProvider.update).to.have.been.calledOnce;
+          expect(updateSpy).to.have.been.calledOnce;
         }
       ));
 
@@ -452,7 +454,7 @@ describe('diagram-js-direct-editing', function() {
         function(canvas, directEditing, directEditingProvider) {
 
           // given
-          sinon.spy(directEditingProvider, 'update');
+          var updateSpy = spy(directEditingProvider, 'update');
 
           var shapeWithLabel = {
             id: 's1',
@@ -469,7 +471,7 @@ describe('diagram-js-direct-editing', function() {
           directEditing.complete();
 
           // then
-          expect(directEditingProvider.update).to.not.have.been.called;
+          expect(updateSpy).to.not.have.been.called;
         }
       ));
 

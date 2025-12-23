@@ -13,8 +13,7 @@ module.exports = function(karma) {
   karma.set({
     frameworks: [
       'webpack',
-      'mocha',
-      'sinon-chai'
+      'mocha'
     ],
 
     files: [
@@ -33,7 +32,15 @@ module.exports = function(karma) {
     autoWatch: false,
 
     webpack: {
-      mode: 'development'
+      mode: 'development',
+      module: {
+        rules: [
+          {
+            test: /test\/globals\.js$/,
+            sideEffects: true
+          }
+        ]
+      }
     }
   });
 
