@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { spy, restore } from 'sinon';
+import { spy, stub, restore } from 'sinon';
 
 import {
   bootstrapDiagram,
@@ -705,6 +705,136 @@ describe('diagram-js-direct-editing', function() {
 
         // then
         expect(directEditing._textbox.content.innerHTML).to.eql('FOOFoo<div><br></div><div>Bar</div>');
+      }));
+
+    });
+
+
+    describe('complete on focus loss (focusout)', function() {
+
+      var mockProvider;
+
+      beforeEach(inject(function(directEditing) {
+
+        // register a minimal mock provider
+        mockProvider = {
+          activate: function(element) {
+            return {
+              bounds: { x: 10, y: 10, width: 100, height: 40 },
+              style: {},
+              text: 'label',
+              options: {}
+            };
+          },
+          update: function() {}
+        };
+
+        directEditing.registerProvider(mockProvider);
+        directEditing.activate({});
+      }));
+
+      afterEach(inject(function(directEditing) {
+        if (directEditing.isActive()) {
+          directEditing.cancel();
+        }
+      }));
+
+
+      it('should complete when focus moves to an external element', inject(function(directEditing) {
+
+        // given
+        var externalElement = document.createElement('div');
+        document.body.appendChild(externalElement);
+
+        var content = directEditing._textbox.content;
+
+        // when - dispatch a focusout with an external relatedTarget
+        var focusEvent = document.createEvent('Event');
+        focusEvent.initEvent('focusout', true, true);
+        focusEvent.relatedTarget = externalElement;
+
+        content.dispatchEvent(focusEvent);
+
+        // then
+        expect(directEditing.isActive()).to.eql(false);
+
+        // cleanup
+        document.body.removeChild(externalElement);
+      }));
+
+
+      it('should complete when the browser window loses focus (relatedTarget is null)', inject(function(directEditing) {
+
+        // given
+        var content = directEditing._textbox.content;
+
+        // when - dispatch a focusout with no relatedTarget (window blur)
+        var focusEvent = document.createEvent('Event');
+        focusEvent.initEvent('focusout', true, true);
+        focusEvent.relatedTarget = null;
+
+        content.dispatchEvent(focusEvent);
+
+        // then
+        expect(directEditing.isActive()).to.eql(false);
+      }));
+
+
+      it('should NOT complete when the textbox content is already detached', inject(function(directEditing) {
+
+        // given
+        var completeSpy = spy(directEditing, 'complete');
+
+        // Create a detached element (never appended to the document),
+        // so document.documentElement.contains() returns false for it.
+        // We call the handler directly to avoid triggering a real browser
+        // focusout when physically removing a focused node from the DOM.
+        var detachedEl = document.createElement('div');
+
+        // when - invoke the handler with a mock event whose target is detached
+        directEditing._handleFocusout({ target: detachedEl, relatedTarget: null });
+
+        // then - complete should not have been called
+        expect(completeSpy).to.not.have.been.called;
+
+        // manually close since we prevented completion
+        directEditing.cancel();
+      }));
+
+
+      it('should NOT call complete() twice when focusout fires re-entrantly', inject(function(directEditing) {
+
+        // given
+        var content = directEditing._textbox.content;
+        var callCount = 0;
+        var originalComplete = directEditing.complete.bind(directEditing);
+
+        // stub complete() to fire a second synchronous focusout before doing real work;
+        // sinon.stub auto-restores via the afterEach restore() already in place
+        stub(directEditing, 'complete').callsFake(function() {
+          callCount++;
+
+          // fire a second focusout synchronously on first call only
+          if (callCount === 1) {
+            var reentrantEvent = document.createEvent('Event');
+            reentrantEvent.initEvent('focusout', true, true);
+            reentrantEvent.relatedTarget = null;
+
+            content.dispatchEvent(reentrantEvent);
+          }
+
+          return originalComplete();
+        });
+
+        // when
+        var focusEvent = document.createEvent('Event');
+        focusEvent.initEvent('focusout', true, true);
+        focusEvent.relatedTarget = null;
+
+        content.dispatchEvent(focusEvent);
+
+        // then - complete should only have been called once (re-entrant call was blocked)
+        expect(callCount).to.eql(1);
       }));
 
     });
