@@ -221,6 +221,29 @@ describe('diagram-js-direct-editing', function() {
       }));
 
 
+      it('should NOT activate when not allowed', inject(function(canvas, directEditing, eventBus) {
+
+        // given
+        var shapeWithLabel = {
+          id: 's1',
+          x: 20, y: 10, width: 60, height: 50,
+          label: 'FOO'
+        };
+        canvas.addShape(shapeWithLabel);
+
+        eventBus.on('directEditing.activate.allowed', function() {
+          return false;
+        });
+
+        // when
+        var activated = directEditing.activate(shapeWithLabel);
+
+        // then
+        expect(activated).to.eql(false);
+        expect(directEditing.isActive()).to.eql(false);
+      }));
+
+
       it('should cancel', inject(function(canvas, directEditing) {
 
         // given
