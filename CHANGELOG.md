@@ -6,6 +6,10 @@ All notable changes to [diagram-js-direct-editing](https://github.com/bpmn-io/di
 
 ___Note:__ Yet to be released changes appear here._
 
+## 3.4.0
+
+* `FEAT`: allow blocking of direct editing activation ([#69](https://github.com/bpmn-io/diagram-js-direct-editing/pull/69))
+
 ## 3.3.0
 
 * `DEPS`: update to `min-dom@5.2.0`
