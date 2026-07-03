@@ -39,7 +39,7 @@
     "npm-run-all2": "^9.0.0",
     "sinon": "^22.0.0",
     "sinon-chai": "^4.0.0",
-    "webpack": "^5.104.1"
+    "webpack": "^5.108.0"
   },
   "dependencies": {
     "min-dash": "^5.0.0",
