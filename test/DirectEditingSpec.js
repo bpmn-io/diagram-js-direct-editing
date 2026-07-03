@@ -732,6 +732,117 @@ describe('diagram-js-direct-editing', function() {
 
     });
 
+
+    describe('complete on focusout', function() {
+
+      function focusout(target, relatedTarget) {
+        var event = document.createEvent('Event');
+
+        event.initEvent('focusout', true, true);
+        event.relatedTarget = relatedTarget || null;
+
+        target.dispatchEvent(event);
+      }
+
+
+      var shape;
+
+      beforeEach(inject(function(canvas, directEditing) {
+        shape = {
+          id: 's1',
+          x: 20, y: 10, width: 60, height: 50,
+          label: 'FOO'
+        };
+
+        canvas.addShape(shape);
+
+        directEditing.activate(shape);
+      }));
+
+
+      it('should complete and preserve focus when focus moves to an external element', inject(
+        async function(directEditing) {
+
+          // given
+          var external = document.createElement('input');
+          document.body.appendChild(external);
+
+          directEditing._textbox.content.innerText = 'BAR';
+
+          // when
+          await act(() => {
+            directEditing._textbox.content.focus();
+          });
+
+          await act(() => {
+            external.focus();
+          });
+
+          try {
+
+            // then
+            expect(directEditing.isActive()).to.eql(false);
+            expect(shape.label).to.eql('BAR');
+            expect(document.activeElement).to.eql(external);
+          } finally {
+            document.body.removeChild(external);
+          }
+        }
+      ));
+
+
+      it('should complete when the window loses focus (relatedTarget=null)', inject(
+        function(directEditing) {
+
+          // given
+          directEditing._textbox.content.innerText = 'BAR';
+
+          // when
+          focusout(directEditing._textbox.content, null);
+
+          // then
+          expect(directEditing.isActive()).to.eql(false);
+          expect(shape.label).to.eql('BAR');
+        }
+      ));
+
+
+      it('should NOT complete when focus moves within the textbox', inject(
+        function(directEditing) {
+
+          // given
+          var completeSpy = spy(directEditing, 'complete');
+
+          // focus moving to a child of the textbox (e.g. resize handle)
+          var child = document.createElement('div');
+          directEditing._textbox.parent.appendChild(child);
+
+          // when
+          focusout(directEditing._textbox.content, child);
+
+          // then
+          expect(completeSpy).not.to.have.been.called;
+          expect(directEditing.isActive()).to.eql(true);
+        }
+      ));
+
+    });
+
   });
 
 });
+
+
+// helper
+
+function act(fn) {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      try {
+        resolve(fn());
+      } catch (e) {
+        reject(e);
+      }
+    });
+  });
+}
