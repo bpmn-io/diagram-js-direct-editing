@@ -3,6 +3,7 @@ import { spy, restore } from 'sinon';
 
 import {
   bootstrapDiagram,
+  getDiagramJS,
   inject
 } from 'diagram-js/test/helper';
 
@@ -39,6 +40,15 @@ function triggerKeyEvent(element, event, code) {
   e.which = code;
 
   element.dispatchEvent(e);
+}
+
+function focusout(target, relatedTarget) {
+  var event = document.createEvent('Event');
+
+  event.initEvent('focusout', true, true);
+  event.relatedTarget = relatedTarget || null;
+
+  target.dispatchEvent(event);
 }
 
 function expectEditingActive(directEditing, parentBounds, contentBounds) {
@@ -733,17 +743,67 @@ describe('diagram-js-direct-editing', function() {
     });
 
 
+    describe('diagram lifecycle', function() {
+
+      beforeEach(inject(function(canvas, directEditing) {
+        var shape = {
+          id: 's1',
+          x: 20, y: 10, width: 60, height: 50,
+          label: 'FOO'
+        };
+
+        canvas.addShape(shape);
+
+        directEditing.activate(shape);
+        directEditing._textbox.content.innerText = 'BAR';
+      }));
+
+
+      it('should cleanup on diagram.clear', inject(
+        function(directEditing, directEditingProvider) {
+
+          // given
+          var cleanupSpy = spy(directEditing, '_cleanup'),
+              updateSpy = spy(directEditingProvider, 'update'),
+              content = directEditing._textbox.content;
+
+          // when
+          getDiagramJS().clear();
+          focusout(content, null);
+
+          // then
+          expect(cleanupSpy).to.have.been.called;
+          expect(updateSpy).not.to.have.been.called;
+
+          expect(directEditing.isActive()).to.eql(false);
+        }
+      ));
+
+
+      it('should cleanup on diagram.destroy', inject(
+        function(directEditing, directEditingProvider) {
+
+          // given
+          var cleanupSpy = spy(directEditing, '_cleanup'),
+              updateSpy = spy(directEditingProvider, 'update'),
+              content = directEditing._textbox.content;
+
+          // when
+          getDiagramJS().destroy();
+          focusout(content, null);
+
+          // then
+          expect(cleanupSpy).to.have.been.called;
+          expect(updateSpy).not.to.have.been.called;
+
+          expect(directEditing.isActive()).to.eql(false);
+        }
+      ));
+
+    });
+
+
     describe('complete on focusout', function() {
-
-      function focusout(target, relatedTarget) {
-        var event = document.createEvent('Event');
-
-        event.initEvent('focusout', true, true);
-        event.relatedTarget = relatedTarget || null;
-
-        target.dispatchEvent(event);
-      }
-
 
       var shape;
 
