@@ -6,6 +6,10 @@ All notable changes to [diagram-js-direct-editing](https://github.com/bpmn-io/di
 
 ___Note:__ Yet to be released changes appear here._
 
+## 3.5.1
+
+* `FIX`: cleanup on `diagram.destroy` / `diagram.clear` ([#75](https://github.com/bpmn-io/diagram-js-direct-editing/pull/75))
+
 ## 3.5.0
 
 * `FEAT`: complete on `focusout` ([#74](https://github.com/bpmn-io/diagram-js-direct-editing/pull/74))
