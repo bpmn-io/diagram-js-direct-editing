@@ -3,10 +3,14 @@
   "version": "3.5.1",
   "description": "Direct editing support for diagram-js",
   "scripts": {
-    "all": "run-s lint test",
+    "all": "run-s lint test generate-types",
     "dev": "npm run test -- --auto-watch --no-single-run",
     "lint": "eslint .",
-    "test": "karma start"
+    "generate-types": "run-s generate-types:*",
+    "generate-types:generate": "del-cli \"lib/**/*.d.ts\" \"lib/**/*.d.ts.map\" && bio-dts -r lib --declarationMap",
+    "generate-types:test": "tsc --noEmit --noImplicitAny",
+    "test": "karma start",
+    "prepublishOnly": "run-s generate-types"
   },
   "repository": {
     "type": "git",
@@ -21,10 +25,13 @@
   },
   "main": "lib/index.js",
   "module": "lib/index.js",
+  "types": "lib/index.d.ts",
   "author": "bpmn.io",
   "license": "MIT",
   "devDependencies": {
+    "bio-dts": "^0.16.0",
     "chai": "^6.2.2",
+    "del-cli": "^7.0.0",
     "diagram-js": "^15.22.0",
     "eslint": "^9.39.4",
     "eslint-plugin-bpmn-io": "^2.3.1",
@@ -39,6 +46,7 @@
     "npm-run-all2": "^9.0.2",
     "sinon": "^22.0.0",
     "sinon-chai": "^4.0.0",
+    "typescript": "^5.9.3",
     "webpack": "^5.108.0"
   },
   "dependencies": {
@@ -49,7 +57,8 @@
     "diagram-js": "*"
   },
   "files": [
-    "lib"
+    "lib",
+    "!lib/**/*.spec.ts"
   ],
   "allowScripts": {
     "unrs-resolver@1.12.2": true

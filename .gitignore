@@ -1,2 +1,4 @@
 node_modules/
 .idea/
+lib/**/*.d.ts
+lib/**/*.d.ts.map
