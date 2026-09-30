@@ -6,6 +6,8 @@ All notable changes to [diagram-js-direct-editing](https://github.com/bpmn-io/di
 
 ___Note:__ Yet to be released changes appear here._
 
+## 3.6.0
+
 * `FEAT`: ship type declarations ([#78](https://github.com/bpmn-io/diagram-js-direct-editing/pull/78), [#62](https://github.com/bpmn-io/diagram-js-direct-editing/issues/62))
 
 ## 3.5.1
